@@ -181,8 +181,35 @@ def get_item(id):
     else:
         return redirect(url_for('timeout')), 301
 
-@app.route('/account-manager/add-item')
+@app.route('/account-manager/add-item', methods=['GET', 'POST'])
 def add_item():
+    if not 'user_id' in session:
+        return redirect(url_for('timeout')), 301
+    if request.method == 'POST':
+        user_id = session['user_id']
+        user = User.by_id(ObjectId(user_id))
+        account_data = request.form.to_dict()
+        if 'Bill' in account_data['category']:
+            user.accounts.append(Account(
+                 name=account_data['account'],
+                 category=account_data['category'],
+                 amount=int(account_data['amount']),
+                 email=account_data['email'],
+                 password=account_data['password'],
+                 account_note=account_data['note'],
+                 priority=account_data['priority'],
+                 autopay=False,
+                 due_date=account_data['due-date']
+             ))
+        else:
+            user.accounts.append(Account(
+                name=account_data['account'],
+                category=account_data['category'],
+                email=account_data['email'],
+                password=account_data['password'],
+                account_note=account_data['note'],
+            ))
+        user.update()
     return render_template('add.html')
 
 @app.route('/account-manager/edit/<id>')

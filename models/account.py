@@ -18,6 +18,8 @@ class Account(SubFrame):
         'notifications'
     }
 
+
+    @staticmethod
     def update_account(data):
         data.update()
         return 'Account updated', 200

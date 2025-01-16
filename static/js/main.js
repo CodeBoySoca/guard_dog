@@ -8,7 +8,7 @@ function clearPasswordResult() {
 function addAccountFields(){
   const category = document.querySelector('#category');
   category.addEventListener('change', (e) => {
-       if (e.currentTarget == 'Bill') {
+       if (e.currentTarget.value == 'Bill') {
            accountFields()
        }
   })
@@ -40,10 +40,11 @@ function accountFields(){
    autoPaySwitch.setAttribute('data-value', 0);
    highOptionElm.setAttribute('value', 'High');
    medOptionElm.setAttribute('value', 'Medium');
-   lowOptionElm.setattribute('value', 'Low');
+   lowOptionElm.setAttribute('value', 'Low');
    const highOptionText = document.createTextNode('High');
    const medOptionText = document.createTextNode('Medium');
    const lowOptionText = document.createTextNode('Low');
+  autoPaySwitch.innerHTML = 0;
    highOptionElm.append(highOptionText);
    medOptionElm.append(medOptionText);
    lowOptionElm.append(lowOptionText);
@@ -59,3 +60,4 @@ function accountFields(){
 }
 
 clearPasswordResult();
+addAccountFields();
