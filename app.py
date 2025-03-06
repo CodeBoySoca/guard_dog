@@ -57,6 +57,9 @@ def remove_note():
 def add_note():
     pass
 
+@app.route('/settings')
+def settings():
+    pass
 
 if __name__ == '__main__':
     app.run(debug=True)
